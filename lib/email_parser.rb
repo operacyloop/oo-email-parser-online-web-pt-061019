@@ -1,22 +1,18 @@
-class EmaiAddresslParser 
-  attr_accessor :name, :csv_emails
-  
-  def initialize(csv_emails)
-    @csv_emails = csv_emails
-  end 
+class EmailAddressParser
+	attr_accessor :emails
+	
+	def initialize(emails)
+		@emails= emails
+	end
+	
+	def parse
+		@emails = @emails.gsub(/[\s,]/ ," ").split
+		# @email is an array now
+		@emails.uniq
+	end
+	
+end
 
-# This will not work because "emails2" below will not be properly parsed  
-# def parse 
-#   csv_emails.split(/\s*,\s*/)
-# end 
-
-  def parse 
-    csv_emails.split.collect do |address|
-      address.split(',') 
-    end
-    .flatten.uniq 
-  end 
-end 
 
 emails1 = "asd@qw.com, per@er.org, Zaza@sugar.net"
 parser1 = EmailParser.new(emails1)
